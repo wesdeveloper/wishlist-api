@@ -11,7 +11,12 @@
     "start": "npm run build && node dist/bin/index.js",
     "start:dev": "ts-node-dev bin/index.ts",
     "lint": "eslint --ext .ts .",
-    "lint:fix": "eslint . --ext .ts --fix"
+    "lint:fix": "eslint . --ext .ts --fix",
+    "test": "npm run test:unit && npm run test:functional",
+    "test:unit": "jest",
+    "test:unit:dev": "jest --watchAll",
+    "test:functional": "jest --projects ./test",
+    "test:functional-dev": "jest --projects ./test --watchAll"
   },
   "repository": {
     "type": "git",
@@ -25,13 +30,16 @@
   },
   "homepage": "https://github.com/wesdeveloper/wishlist-api#readme",
   "devDependencies": {
+    "@types/jest": "^26.0.23",
     "@typescript-eslint/eslint-plugin": "^4.25.0",
     "@typescript-eslint/parser": "^4.25.0",
     "eslint": "^7.27.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-airbnb-typescript": "^12.3.1",
     "eslint-plugin-import": "^2.23.4",
+    "jest": "^27.0.3",
     "rimraf": "^3.0.2",
+    "ts-jest": "^27.0.1",
     "ts-node-dev": "^1.1.6",
     "typescript": "^4.3.2"
   }
