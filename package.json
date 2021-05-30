@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "14.16.0"
+  },
   "name": "wishlist-api",
   "version": "1.0.0",
   "description": "",
