@@ -1,13 +1,13 @@
 import { validateObject } from '../../utils/validator';
 import { badRequest } from '../helpers';
 import { Controller, HttpResponse } from '../protocols';
-import { clientSignUpSchema } from '../protocols/client-validator';
+import { clientCreateSchema } from '../protocols/client-validator';
 
-export class ClientSignUpController implements Controller {
+export class CreateClientController implements Controller {
   async handle(request: any): Promise<HttpResponse> {
     const { body } = request;
 
-    const validationResult = validateObject(body, clientSignUpSchema);
+    const validationResult = validateObject(body, clientCreateSchema);
     if (!validationResult.isValid) {
       return badRequest(validationResult.errors);
     }

@@ -1,1 +1,1 @@
-export * from './client-signup-controller';
+export * from './create-client-controller';

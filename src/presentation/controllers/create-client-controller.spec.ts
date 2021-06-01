@@ -1,15 +1,15 @@
 import Chance from 'chance';
-import { HelperValidatorErrorItem, validateObject } from '../../utils/validator';
+import { HelperValidatorErrorItem } from '../../utils/validator';
 import { HttpRequest, HttpResponse } from '../protocols';
-import { ClientSignUpController } from './client-signup-controller';
+import { CreateClientController } from './create-client-controller';
 
 const chance = new Chance();
 
 const makeSut = () => {
-  const clientSignUpController = new ClientSignUpController();
+  const createClientController = new CreateClientController();
 
   return {
-    clientSignUpController,
+    createClientController,
   };
 };
 
@@ -32,7 +32,7 @@ describe('ClientSignUp Controller', () => {
       const httpRequest: HttpRequest = {
         body: clientData,
       };
-      const httpResponse: HttpResponse = await sut.clientSignUpController.handle(httpRequest);
+      const httpResponse: HttpResponse = await sut.createClientController.handle(httpRequest);
       expect(httpResponse.status).toBe(201);
       expect(httpResponse.data).toEqual(expect.objectContaining({ ...clientData, id: expect.any(Number) }));
     });
@@ -53,13 +53,27 @@ describe('ClientSignUp Controller', () => {
           const httpRequest: HttpRequest = {
             body: clientWithoutKey,
           };
-          const httpResponse: HttpResponse = await sut.clientSignUpController.handle(httpRequest);
+          const httpResponse: HttpResponse = await sut.createClientController.handle(httpRequest);
 
           expect(httpResponse.status).toBe(400);
 
           const errorItem: HelperValidatorErrorItem = httpResponse.data?.errors?.find((error: HelperValidatorErrorItem) => error.path === clientKey);
           expect(errorItem).not.toBeNull();
         });
+      });
+    });
+
+    describe('Internal server error', () => {
+      it('Should create a client and receive internal server error', async () => {
+        const clientData = makeClientData();
+        const sut = makeSut();
+
+        const httpRequest: HttpRequest = {
+          body: clientData,
+        };
+        const httpResponse: HttpResponse = await sut.createClientController.handle(httpRequest);
+        expect(httpResponse.status).toBe(201);
+        expect(httpResponse.data).toEqual(expect.objectContaining({ ...clientData, id: expect.any(Number) }));
       });
     });
   });
