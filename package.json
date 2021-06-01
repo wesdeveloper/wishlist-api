@@ -30,9 +30,11 @@
   },
   "homepage": "https://github.com/wesdeveloper/wishlist-api#readme",
   "devDependencies": {
+    "@types/chance": "^1.1.2",
     "@types/jest": "^26.0.23",
     "@typescript-eslint/eslint-plugin": "^4.25.0",
     "@typescript-eslint/parser": "^4.25.0",
+    "chance": "^1.1.7",
     "eslint": "^7.27.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-airbnb-typescript": "^12.3.1",
