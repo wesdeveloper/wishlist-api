@@ -1,5 +1,5 @@
 import Chance from 'chance';
-import { HelperValidatorErrorItem } from '../../utils/validator';
+import { HelperValidatorErrorItem, validateObject } from '../../utils/validator';
 import { HttpRequest, HttpResponse } from '../protocols';
 import { ClientSignUpController } from './client-signup-controller';
 
@@ -38,25 +38,28 @@ describe('ClientSignUp Controller', () => {
     });
   });
 
-  describe('validations', () => {
-    const clientData = makeClientData();
-    const clientKeysValidation = ['name', 'email'];
+  describe('Error cases', () => {
+    describe('Bad request', () => {
+      const sut = makeSut();
+      const clientData = makeClientData();
 
-    const sut = makeSut();
-    clientKeysValidation.forEach((clientKey) => {
-      const clientWithoutKey: any = { ...clientData };
-      delete clientWithoutKey[clientKey];
+      const clientKeysValidation = ['name', 'email'];
 
-      it(`Should create a client without ${clientKey} and receive bad request error`, async () => {
-        const httpRequest: HttpRequest = {
-          body: clientWithoutKey,
-        };
-        const httpResponse: HttpResponse = await sut.clientSignUpController.handle(httpRequest);
+      clientKeysValidation.forEach((clientKey) => {
+        const clientWithoutKey: any = { ...clientData };
+        delete clientWithoutKey[clientKey];
 
-        expect(httpResponse.status).toBe(400);
+        it(`Should create a client without ${clientKey} and receive bad request error`, async () => {
+          const httpRequest: HttpRequest = {
+            body: clientWithoutKey,
+          };
+          const httpResponse: HttpResponse = await sut.clientSignUpController.handle(httpRequest);
 
-        const errorItem: HelperValidatorErrorItem = httpResponse.data?.errors?.find((error: HelperValidatorErrorItem) => error.path === clientKey);
-        expect(errorItem).not.toBeNull();
+          expect(httpResponse.status).toBe(400);
+
+          const errorItem: HelperValidatorErrorItem = httpResponse.data?.errors?.find((error: HelperValidatorErrorItem) => error.path === clientKey);
+          expect(errorItem).not.toBeNull();
+        });
       });
     });
   });
