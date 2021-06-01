@@ -1,20 +1,31 @@
+import { CreateClient } from 'src/domain/usecases/create-client';
 import { validateObject } from '../../utils/validator';
-import { badRequest } from '../helpers';
+import { badRequest, serverError } from '../helpers';
 import { Controller, HttpResponse } from '../protocols';
 import { clientCreateSchema } from '../protocols/client-validator';
 
 export class CreateClientController implements Controller {
+  constructor(
+    private readonly createClient: CreateClient,
+  ) {}
+
   async handle(request: any): Promise<HttpResponse> {
-    const { body } = request;
+    try {
+      const { body } = request;
 
-    const validationResult = validateObject(body, clientCreateSchema);
-    if (!validationResult.isValid) {
-      return badRequest(validationResult.errors);
+      const validationResult = validateObject(body, clientCreateSchema);
+      if (!validationResult.isValid) {
+        return badRequest(validationResult.errors);
+      }
+
+      const client = await this.createClient.create(body);
+
+      return {
+        status: 201,
+        data: client,
+      };
+    } catch (e) {
+      return serverError();
     }
-
-    return {
-      status: 201,
-      data: { ...request.body, id: 1 },
-    };
   }
 }
