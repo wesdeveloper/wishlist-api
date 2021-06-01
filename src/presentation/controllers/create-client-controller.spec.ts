@@ -1,15 +1,29 @@
 import Chance from 'chance';
+import { ClientModel } from 'src/domain/models/client';
+import { CreateClient, CreateClientData } from 'src/domain/usecases/create-client';
 import { HelperValidatorErrorItem } from '../../utils/validator';
 import { HttpRequest, HttpResponse } from '../protocols';
 import { CreateClientController } from './create-client-controller';
 
 const chance = new Chance();
 
+const makeCreateClientUseCase = () => {
+  class CreateClientSpy implements CreateClient {
+    async create(client: CreateClientData): Promise<ClientModel> {
+      return { ...client, id: 1 };
+    }
+  }
+
+  const createClientSpy = new CreateClientSpy();
+  return createClientSpy;
+};
 const makeSut = () => {
-  const createClientController = new CreateClientController();
+  const createClientSpy = makeCreateClientUseCase();
+  const sut = new CreateClientController(createClientSpy);
 
   return {
-    createClientController,
+    sut,
+    createClientSpy,
   };
 };
 
@@ -27,12 +41,12 @@ describe('Create Client Controller', () => {
     it('Should create a client', async () => {
       const clientData = makeClientData();
 
-      const sut = makeSut();
+      const { sut } = makeSut();
 
       const httpRequest: HttpRequest = {
         body: clientData,
       };
-      const httpResponse: HttpResponse = await sut.createClientController.handle(httpRequest);
+      const httpResponse: HttpResponse = await sut.handle(httpRequest);
       expect(httpResponse.status).toBe(201);
       expect(httpResponse.data).toEqual(expect.objectContaining({ ...clientData, id: expect.any(Number) }));
     });
@@ -40,7 +54,7 @@ describe('Create Client Controller', () => {
 
   describe('Error cases', () => {
     describe('Bad request', () => {
-      const sut = makeSut();
+      const { sut } = makeSut();
       const clientData = makeClientData();
 
       const clientKeysValidation = ['name', 'email'];
@@ -53,7 +67,7 @@ describe('Create Client Controller', () => {
           const httpRequest: HttpRequest = {
             body: clientWithoutKey,
           };
-          const httpResponse: HttpResponse = await sut.createClientController.handle(httpRequest);
+          const httpResponse: HttpResponse = await sut.handle(httpRequest);
 
           expect(httpResponse.status).toBe(400);
 
@@ -66,14 +80,17 @@ describe('Create Client Controller', () => {
     describe('Internal server error', () => {
       it('Should create a client and receive internal server error', async () => {
         const clientData = makeClientData();
-        const sut = makeSut();
+
+        const { sut, createClientSpy } = makeSut();
+        jest.spyOn(createClientSpy, 'create').mockImplementationOnce(async () => {
+          throw new Error();
+        });
 
         const httpRequest: HttpRequest = {
           body: clientData,
         };
-        const httpResponse: HttpResponse = await sut.createClientController.handle(httpRequest);
-        expect(httpResponse.status).toBe(201);
-        expect(httpResponse.data).toEqual(expect.objectContaining({ ...clientData, id: expect.any(Number) }));
+        const httpResponse: HttpResponse = await sut.handle(httpRequest);
+        expect(httpResponse.status).toBe(500);
       });
     });
   });
