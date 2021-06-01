@@ -22,7 +22,7 @@ const makeClientData = () => {
   return client;
 };
 
-describe('ClientSignUp Controller', () => {
+describe('Create Client Controller', () => {
   describe('Success cases', () => {
     it('Should create a client', async () => {
       const clientData = makeClientData();
