@@ -1,4 +1,4 @@
-import { CreateClient } from 'src/domain/usecases/create-client';
+import { CreateClient } from '../../domain/usecases/create-client';
 import { validateObject } from '../../utils/validator';
 import { badRequest, serverError } from '../helpers';
 import { Controller, HttpResponse } from '../protocols';
