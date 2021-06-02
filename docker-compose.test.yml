@@ -1,0 +1,24 @@
+version: "3"
+services:
+  wishlistapi:
+    build: .
+    volumes:
+      - .:/app
+    environment:
+      NODE_ENV: test
+      DB_HOST: db-test
+      DB_PORT: 3306
+      DB_USER: wishlist
+      DB_PASS: wishlist123
+      DB_NAME: wishlist_test
+      WAIT_HOSTS: db-test:3306
+    command: sh -c "/wait && npm run knex:migrate:latest && npm run test:functional"
+    depends_on:
+      - db-test
+  db-test:
+    image: mysql:5.7
+    environment:
+      MYSQL_USER: wishlist
+      MYSQL_PASSWORD: wishlist123
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: wishlist_test
