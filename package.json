@@ -38,9 +38,12 @@
   "devDependencies": {
     "@types/chance": "^1.1.2",
     "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.12",
     "@types/jest": "^26.0.23",
     "@types/joi": "^17.2.3",
     "@types/knex": "^0.16.1",
+    "@types/morgan": "^1.9.2",
+    "@types/winston": "^2.4.4",
     "@typescript-eslint/eslint-plugin": "^4.25.0",
     "@typescript-eslint/parser": "^4.25.0",
     "chance": "^1.1.7",
@@ -56,8 +59,11 @@
   },
   "dependencies": {
     "dotenv": "^10.0.0",
+    "express": "^4.17.1",
     "joi": "^17.4.0",
     "knex": "^0.95.6",
-    "mysql2": "^2.2.5"
+    "morgan": "^1.10.0",
+    "mysql2": "^2.2.5",
+    "winston": "^3.3.3"
   }
 }
