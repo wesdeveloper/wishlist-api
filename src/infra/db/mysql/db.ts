@@ -9,7 +9,7 @@ if (environment === 'test') {
   clientConfig = knexfile.test;
 }
 
-export class Database {
+class Database {
   private connection!: Knex<any, unknown[]>;
 
   private connect(): void {

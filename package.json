@@ -21,7 +21,7 @@
     "knex:migrate:latest": "knex migrate:latest",
     "knex:migrate:rollback": "knex migrate:rollback",
     "docker:dev": "docker-compose up -d",
-    "docker:dev:logs": "docker-compose logs -f workoutlogapi",
+    "docker:dev:logs": "docker-compose logs -f wishlistapi",
     "docker:test": "docker-compose -f docker-compose.test.yml up --abort-on-container-exit"
   },
   "repository": {
