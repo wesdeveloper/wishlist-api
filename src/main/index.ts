@@ -2,6 +2,7 @@ import express, { Application, Express } from 'express';
 import morgan from 'morgan';
 import logger from '../utils/logger';
 import { clientRoutes } from './routes';
+import database from '../infra/db/mysql/db';
 
 class App {
   private app: Express = express();
@@ -22,6 +23,7 @@ class App {
     this.loadRoutes();
 
     try {
+      await database.checkConnection();
       logger.info('init application finished!');
       return this.app;
     } catch (err) {
