@@ -1,9 +1,11 @@
 import { Knex } from 'knex';
-import { CreateClientRepository, FetchClientByIdRepository, FetchClientRepository } from '../../../../data/protocols';
+import {
+  CreateClientRepository, FetchClientByIdRepository, FetchClientRepository, UpdateClientRepository,
+} from '../../../../data/protocols';
 import { ClientModel, FetchClientModel } from '../../../../domain/models';
-import { CreateClientData } from '../../../../domain/usecases';
+import { CreateClientData, UpdateClientData } from '../../../../domain/usecases';
 
-export class ClientRepository implements CreateClientRepository, FetchClientRepository, FetchClientByIdRepository {
+export class ClientRepository implements CreateClientRepository, FetchClientRepository, FetchClientByIdRepository, UpdateClientRepository {
   constructor(private readonly dbConnection: Knex<any, unknown[]>) {
   }
 
@@ -36,5 +38,17 @@ export class ClientRepository implements CreateClientRepository, FetchClientRepo
       .where('id', clientId);
 
     return clientData;
+  };
+
+  update = async (clientId: number, data: UpdateClientData): Promise<ClientModel | undefined> => {
+    const isUpdated = await this.dbConnection<ClientModel>('client')
+      .where('id', clientId)
+      .update(data)
+      .select('*');
+
+    if (!isUpdated) {
+      return;
+    }
+    return this.fetchById(clientId);
   };
 }
