@@ -6,6 +6,10 @@ export const badRequest = (data: HelperValidatiorResult['errors']): HttpResponse
   data,
 });
 
+export const notFound = (): HttpResponse => ({
+  status: 404,
+});
+
 export const serverError = (): HttpResponse => ({
   status: 500,
 });
