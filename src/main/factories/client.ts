@@ -1,7 +1,10 @@
+import { UpdateClientController } from '../../presentation/controllers/update-client-controller';
 import { FetchClientByIdController } from '../../presentation/controllers/fetch-client-by-id';
 import { FetchClientController } from '../../presentation/controllers/fetch-client-controller';
 import database from '../../infra/db/mysql/db';
-import { CreateClientUseCase, FetchClientUseCase, FetchClientByIdUseCase } from '../../data/usecases';
+import {
+  CreateClientUseCase, FetchClientUseCase, FetchClientByIdUseCase, UpdateClientUseCase,
+} from '../../data/usecases';
 import { ClientRepository } from '../../infra/db/mysql/client-repository/client-repository';
 import { CreateClientController } from '../../presentation/controllers';
 
@@ -27,4 +30,11 @@ export const makeFetchClientByIdController = (): FetchClientByIdController => {
   const fetchClientByIdController = new FetchClientByIdController(fetchClientById);
 
   return fetchClientByIdController;
+};
+
+export const makeUpdateClientController = (): UpdateClientController => {
+  const updateClient = new UpdateClientUseCase(clientRepository);
+  const updateClientController = new UpdateClientController(updateClient);
+
+  return updateClientController;
 };

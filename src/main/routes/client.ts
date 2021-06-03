@@ -1,6 +1,11 @@
 import { Router } from 'express';
 import { expressRouterAdapter } from '../adapters/express-route-adapter';
-import { makeCreateClientController, makeFetchClientByIdController, makeFetchClientController } from '../factories/client';
+import {
+  makeCreateClientController,
+  makeFetchClientByIdController,
+  makeFetchClientController,
+  makeUpdateClientController,
+} from '../factories/client';
 import BaseRoutes from './protocols/base-routes';
 
 class ClientRoutes extends BaseRoutes {
@@ -8,11 +13,13 @@ class ClientRoutes extends BaseRoutes {
     const createClientController = makeCreateClientController();
     const fetchClientController = makeFetchClientController();
     const fetchClientByIdController = makeFetchClientByIdController();
+    const updateClientController = makeUpdateClientController();
 
     router
-      .post('/client', expressRouterAdapter(createClientController))
+      .get('/client/:clientId', expressRouterAdapter(fetchClientByIdController))
+      .patch('/client/:clientId', expressRouterAdapter(updateClientController))
       .get('/client', expressRouterAdapter(fetchClientController))
-      .get('/client/:clientId', expressRouterAdapter(fetchClientByIdController));
+      .post('/client', expressRouterAdapter(createClientController));
   }
 }
 
