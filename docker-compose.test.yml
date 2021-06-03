@@ -17,6 +17,8 @@ services:
       - db-test
   db-test:
     image: mysql:5.7
+    ports:
+      - 33306:3306
     environment:
       MYSQL_USER: wishlist
       MYSQL_PASSWORD: wishlist123

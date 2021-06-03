@@ -9,10 +9,6 @@ beforeAll(async () => {
   global.testRequest = supertest(server);
 });
 
-afterEach(async () => {
-  await database.getConnection()('client').delete();
-});
-
 afterAll(async () => {
   await database.closeConnection();
 });
