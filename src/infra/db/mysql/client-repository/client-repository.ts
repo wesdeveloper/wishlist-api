@@ -1,11 +1,16 @@
 import { Knex } from 'knex';
 import {
-  CreateClientRepository, FetchClientByIdRepository, FetchClientRepository, UpdateClientRepository,
+  CreateClientRepository, FetchClientByIdRepository, FetchClientRepository, RemoveClientRepository, UpdateClientRepository,
 } from '../../../../data/protocols';
 import { ClientModel, FetchClientModel } from '../../../../domain/models';
 import { CreateClientData, UpdateClientData } from '../../../../domain/usecases';
 
-export class ClientRepository implements CreateClientRepository, FetchClientRepository, FetchClientByIdRepository, UpdateClientRepository {
+export class ClientRepository implements
+  CreateClientRepository,
+  FetchClientRepository,
+  FetchClientByIdRepository,
+  UpdateClientRepository,
+  RemoveClientRepository {
   constructor(private readonly dbConnection: Knex<any, unknown[]>) {
   }
 
@@ -50,5 +55,13 @@ export class ClientRepository implements CreateClientRepository, FetchClientRepo
       return;
     }
     return this.fetchById(clientId);
+  };
+
+  remove = async (clientId: number): Promise<boolean> => {
+    const isRemoved = await this.dbConnection<ClientModel>('client')
+      .where('id', clientId)
+      .del();
+
+    return !!isRemoved;
   };
 }
