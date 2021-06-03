@@ -1,7 +1,7 @@
 import { Knex } from 'knex';
-import { CreateClientRepository, FetchClientRepository } from '../../../../data/protocols/client';
-import { ClientModel, FetchClientModel } from '../../../../domain/models/client';
-import { CreateClientData } from '../../../../domain/usecases/create-client';
+import { CreateClientRepository, FetchClientRepository } from '../../../../data/protocols';
+import { ClientModel, FetchClientModel } from '../../../../domain/models';
+import { CreateClientData } from '../../../../domain/usecases';
 
 export class ClientRepository implements CreateClientRepository, FetchClientRepository {
   constructor(private readonly dbConnection: Knex<any, unknown[]>) {

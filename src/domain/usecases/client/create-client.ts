@@ -1,4 +1,4 @@
-import { ClientModel } from '../models/client';
+import { ClientModel } from '../../models';
 
 export interface CreateClientData {
   name: string

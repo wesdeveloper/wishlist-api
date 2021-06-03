@@ -1,6 +1,6 @@
 import { FetchClientRepository } from '../../protocols';
-import { FetchClientModel } from '../../../domain/models/client';
-import { FetchClient } from '../../../domain/usecases/fetch-client';
+import { FetchClientModel } from '../../../domain/models';
+import { FetchClient } from '../../../domain/usecases';
 
 export class FetchClientUseCase implements FetchClient {
   constructor(private readonly fetchClientRepository: FetchClientRepository) {}

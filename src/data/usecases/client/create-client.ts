@@ -1,5 +1,5 @@
-import { ClientModel } from '../../../domain/models/client';
-import { CreateClient, CreateClientData } from '../../../domain/usecases/create-client';
+import { ClientModel } from '../../../domain/models';
+import { CreateClient, CreateClientData } from '../../../domain/usecases';
 import { CreateClientRepository } from '../../protocols';
 
 export class CreateClientUseCase implements CreateClient {

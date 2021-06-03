@@ -1,5 +1,5 @@
-import { FetchClientModel } from '../../domain/models/client';
-import { FetchClient } from '../../domain/usecases/fetch-client';
+import { FetchClientModel } from '../../domain/models';
+import { FetchClient } from '../../domain/usecases';
 import { HttpRequest, HttpResponse } from '../protocols';
 import { FetchClientController } from './fetch-client-controller';
 

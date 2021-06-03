@@ -1,6 +1,6 @@
 import Chance from 'chance';
-import { ClientModel } from '../../../domain/models/client';
-import { CreateClientData } from '../../../domain/usecases/create-client';
+import { ClientModel } from '../../../domain/models';
+import { CreateClientData } from '../../../domain/usecases';
 import { CreateClientRepository } from '../../protocols';
 import { CreateClientUseCase } from './create-client';
 

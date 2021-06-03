@@ -1,6 +1,6 @@
 import Chance from 'chance';
-import { ClientModel } from 'src/domain/models/client';
-import { CreateClient, CreateClientData } from 'src/domain/usecases/create-client';
+import { ClientModel } from 'src/domain/models';
+import { CreateClient, CreateClientData } from 'src/domain/usecases';
 import { HelperValidatorErrorItem } from '../../utils/validator';
 import { HttpRequest, HttpResponse } from '../protocols';
 import { CreateClientController } from './create-client-controller';

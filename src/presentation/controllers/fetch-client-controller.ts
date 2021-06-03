@@ -1,4 +1,4 @@
-import { FetchClient } from '../../domain/usecases/fetch-client';
+import { FetchClient } from '../../domain/usecases';
 import { serverError } from '../helpers';
 import { Controller, HttpRequest, HttpResponse } from '../protocols';
 
