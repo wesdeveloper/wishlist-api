@@ -1,5 +1,6 @@
 import knex, { Knex } from 'knex';
 import assert from 'assert';
+import { attachPaginate } from 'knex-paginate';
 import knexfile from '../../../../knexfile';
 
 const environment = process.env.NODE_ENV || 'development';
@@ -13,7 +14,9 @@ class Database {
   private connection!: Knex<any, unknown[]>;
 
   private connect(): void {
-    this.connection = knex(clientConfig);
+    const dbConnection = knex(clientConfig);
+    attachPaginate();
+    this.connection = dbConnection;
   }
 
   public async checkConnection(): Promise<void> {
