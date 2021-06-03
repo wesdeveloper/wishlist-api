@@ -4,7 +4,8 @@ import { Controller, HttpRequest, HttpResponse } from '../../presentation/protoc
 export const expressRouterAdapter = (controller: Controller) => async (req: Request, res: Response) => {
   const httpRequest: HttpRequest = {
     body: req.body,
-    query: {},
+    query: req.query,
+    params: req.params,
   };
 
   const httpResponse: HttpResponse = await controller.handle(httpRequest);
