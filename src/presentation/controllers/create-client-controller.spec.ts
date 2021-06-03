@@ -45,6 +45,7 @@ describe('Create Client Controller', () => {
 
       const httpRequest: HttpRequest = {
         body: clientData,
+        query: {},
       };
       const httpResponse: HttpResponse = await sut.handle(httpRequest);
       expect(httpResponse.status).toBe(201);
@@ -66,6 +67,7 @@ describe('Create Client Controller', () => {
         it(`Should create a client without ${clientKey} and receive bad request error`, async () => {
           const httpRequest: HttpRequest = {
             body: clientWithoutKey,
+            query: {},
           };
           const httpResponse: HttpResponse = await sut.handle(httpRequest);
 
@@ -88,6 +90,7 @@ describe('Create Client Controller', () => {
 
         const httpRequest: HttpRequest = {
           body: clientData,
+          query: {},
         };
         const httpResponse: HttpResponse = await sut.handle(httpRequest);
         expect(httpResponse.status).toBe(500);
