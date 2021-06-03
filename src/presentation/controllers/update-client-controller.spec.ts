@@ -1,5 +1,6 @@
 import Chance from 'chance';
 import { ClientModel } from 'src/domain/models';
+import { HelperValidatorErrorItem } from 'src/utils';
 import { UpdateClient, UpdateClientData } from '../../domain/usecases';
 import { HttpRequest, HttpResponse } from '../protocols';
 import { UpdateClientController } from './update-client-controller';
@@ -39,30 +40,39 @@ describe('Update Client Controller', () => {
   describe('Success cases', () => {
     it('Should update a client', async () => {
       const { sut } = makeSut();
-      const clientData = {
-        id: chance.integer(),
-        ...makeClientData(),
-      };
+      const clientId = chance.integer();
 
       const httpRequest: HttpRequest = {
-        body: clientData,
-        params: { clientId: clientData.id },
+        body: { name: chance.name() },
+        params: { clientId },
       };
 
       const httpResponse: HttpResponse = await sut.handle(httpRequest);
       expect(httpResponse.status).toBe(200);
-      expect(httpResponse.data.id).toEqual(clientData.id);
+      expect(httpResponse.data.id).toEqual(clientId);
     });
   });
 
   describe('Error cases', () => {
+    describe('Bad request', () => {
+      it('Should update a client without  data and receive bad request error', async () => {
+        const { sut } = makeSut();
+        const httpRequest: HttpRequest = {
+          params: { clientId: chance.integer() },
+        };
+        const httpResponse: HttpResponse = await sut.handle(httpRequest);
+
+        expect(httpResponse.status).toBe(400);
+      });
+    });
+
     describe('Not found error', () => {
       it('Should update a client that not exists', async () => {
         const { sut, updateClientSpy } = makeSut();
         jest.spyOn(updateClientSpy, 'update').mockImplementationOnce(() => Promise.resolve(undefined));
 
         const httpRequest: HttpRequest = {
-          body: makeClientData(),
+          body: { name: chance.name() },
           params: { clientId: chance.integer() },
         };
         const httpResponse: HttpResponse = await sut.handle(httpRequest);
@@ -78,7 +88,7 @@ describe('Update Client Controller', () => {
         });
 
         const httpRequest: HttpRequest = {
-          body: makeClientData(),
+          body: { name: chance.name() },
           params: { clientId: chance.integer() },
         };
         const httpResponse: HttpResponse = await sut.handle(httpRequest);
