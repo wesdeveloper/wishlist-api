@@ -3,10 +3,11 @@ import { FetchClientByIdController } from '../../presentation/controllers/fetch-
 import { FetchClientController } from '../../presentation/controllers/fetch-client-controller';
 import database from '../../infra/db/mysql/db';
 import {
-  CreateClientUseCase, FetchClientUseCase, FetchClientByIdUseCase, UpdateClientUseCase,
+  CreateClientUseCase, FetchClientUseCase, FetchClientByIdUseCase, UpdateClientUseCase, RemoveClientUseCase,
 } from '../../data/usecases';
 import { ClientRepository } from '../../infra/db/mysql/client-repository/client-repository';
 import { CreateClientController } from '../../presentation/controllers';
+import { RemoveClientController } from '../../presentation/controllers/remove-client-controller';
 
 const dbConnection = database.getConnection();
 const clientRepository = new ClientRepository(dbConnection);
@@ -37,4 +38,11 @@ export const makeUpdateClientController = (): UpdateClientController => {
   const updateClientController = new UpdateClientController(updateClient);
 
   return updateClientController;
+};
+
+export const makeRemoveClientController = (): RemoveClientController => {
+  const removeClient = new RemoveClientUseCase(clientRepository);
+  const removeClientController = new RemoveClientController(removeClient);
+
+  return removeClientController;
 };

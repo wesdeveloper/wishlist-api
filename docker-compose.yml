@@ -16,7 +16,7 @@ services:
     ports:
       - 33306:3306
     environment:
-      MYSQL_USER: wishlist_dev
+      MYSQL_USER: wishlist
       MYSQL_PASSWORD: wishlist123
       MYSQL_ROOT_PASSWORD: 123
       MYSQL_DATABASE: wishlist_development
