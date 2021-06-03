@@ -1,20 +1,10 @@
 import Chance from 'chance';
 import { ClientModel } from 'src/domain/models';
-import { HelperValidatorErrorItem } from 'src/utils';
 import { UpdateClient, UpdateClientData } from '../../domain/usecases';
 import { HttpRequest, HttpResponse } from '../protocols';
 import { UpdateClientController } from './update-client-controller';
 
 const chance = new Chance();
-
-const makeClientData = () => {
-  const client = {
-    name: chance.name(),
-    email: chance.email(),
-  };
-
-  return client;
-};
 
 const makeUpdateClientUseCase = () => {
   class UpdateClientSpy implements UpdateClient {

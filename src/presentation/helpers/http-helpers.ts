@@ -6,6 +6,10 @@ export const okRequest = <T>(data: T): HttpResponse => ({
   data,
 });
 
+export const noContent = (): HttpResponse => ({
+  status: 204,
+});
+
 export const badRequest = (data: HelperValidatiorResult['errors']): HttpResponse => ({
   status: 400,
   data,
