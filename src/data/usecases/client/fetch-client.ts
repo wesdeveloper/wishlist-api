@@ -1,4 +1,4 @@
-import { FetchClientRepository } from 'src/data/protocols/client/fetch-client-repository';
+import { FetchClientRepository } from '../../protocols';
 import { FetchClientModel } from '../../../domain/models/client';
 import { FetchClient } from '../../../domain/usecases/fetch-client';
 

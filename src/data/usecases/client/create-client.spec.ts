@@ -1,7 +1,7 @@
 import Chance from 'chance';
-import { CreateClientRepository } from 'src/data/protocols/client/create-client-repository';
-import { ClientModel } from 'src/domain/models/client';
-import { CreateClientData } from 'src/domain/usecases/create-client';
+import { ClientModel } from '../../../domain/models/client';
+import { CreateClientData } from '../../../domain/usecases/create-client';
+import { CreateClientRepository } from '../../protocols';
 import { CreateClientUseCase } from './create-client';
 
 const chance = new Chance();

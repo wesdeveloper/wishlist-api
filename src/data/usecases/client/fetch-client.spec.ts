@@ -1,5 +1,5 @@
-import { FetchClientModel } from 'src/domain/models/client';
-import { FetchClientRepository } from '../../protocols/client/fetch-client-repository';
+import { FetchClientModel } from '../../../domain/models/client';
+import { FetchClientRepository } from '../../protocols';
 import { FetchClientUseCase } from './fetch-client';
 
 const makeFetchClientRepository = () => {
