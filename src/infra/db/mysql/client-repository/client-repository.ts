@@ -1,9 +1,9 @@
 import { Knex } from 'knex';
-import { CreateClientRepository, FetchClientRepository } from '../../../../data/protocols';
+import { CreateClientRepository, FetchClientByIdRepository, FetchClientRepository } from '../../../../data/protocols';
 import { ClientModel, FetchClientModel } from '../../../../domain/models';
 import { CreateClientData } from '../../../../domain/usecases';
 
-export class ClientRepository implements CreateClientRepository, FetchClientRepository {
+export class ClientRepository implements CreateClientRepository, FetchClientRepository, FetchClientByIdRepository {
   constructor(private readonly dbConnection: Knex<any, unknown[]>) {
   }
 
@@ -20,7 +20,7 @@ export class ClientRepository implements CreateClientRepository, FetchClientRepo
   };
 
   fetch = async (page: number = 1, pageSize: number = 10): Promise<FetchClientModel> => {
-    const { data, pagination } = await this.dbConnection('client')
+    const { data, pagination } = await this.dbConnection<ClientModel>('client')
       .select('*')
       .paginate({ perPage: pageSize, currentPage: page });
 
@@ -28,5 +28,13 @@ export class ClientRepository implements CreateClientRepository, FetchClientRepo
       clients: data,
       pagination,
     };
+  };
+
+  fetchById = async (clientId: number): Promise<ClientModel | undefined> => {
+    const [clientData] = await this.dbConnection<ClientModel>('client')
+      .select('*')
+      .where('id', clientId);
+
+    return clientData;
   };
 }
