@@ -64,6 +64,10 @@ npm run start
 
 ## Built With
 
+* [NodeJs](https://nodejs.org/en/) - Node.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine.
+
+* [TypeScript](https://www.typescriptlang.org/) - Typed JavaScript at Any Scale.
+
 * [Express](https://expressjs.com/) - Fast, unopinionated, minimalist web framework for Node.js
 
 * [Mysql](https://www.mysql.com/) -  MySQL is an open-source relational database management system (RDBMS).
