@@ -2,6 +2,9 @@
 
 A system to client to comunicate with an app and provide data about client and their favorite products.
 
+## Api Documentation
+This is a postman documentation of the routes of the api: https://documenter.getpostman.com/view/7831331/TzY4gaxv
+
 ### Prerequisites
 
 You need to have node/npm and docker installed on your machine.
