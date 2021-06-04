@@ -1,6 +1,6 @@
-import { FetchClientById } from '../../domain/usecases';
-import { notFound, serverError } from '../helpers';
-import { Controller, HttpResponse } from '../protocols';
+import { FetchClientById } from '../../../domain/usecases';
+import { notFound, serverError } from '../../helpers';
+import { Controller, HttpResponse } from '../../protocols';
 
 export class FetchClientByIdController implements Controller {
   constructor(

@@ -1,10 +1,17 @@
-import { validateObject } from '../../utils';
-import { UpdateClient } from '../../domain/usecases';
+import { validateObject } from '../../../utils';
+import { UpdateClient } from '../../../domain/usecases';
+import { clientUpdateSchema } from '../../protocols/client-validator';
 import {
-  badRequest, notFound, okRequest, serverError,
-} from '../helpers';
-import { Controller, HttpRequest, HttpResponse } from '../protocols';
-import { clientUpdateSchema } from '../protocols/client-validator';
+  badRequest,
+  notFound,
+  okRequest,
+  serverError,
+} from '../../helpers';
+import {
+  Controller,
+  HttpRequest,
+  HttpResponse,
+} from '../../protocols';
 
 export class UpdateClientController implements Controller {
   constructor(

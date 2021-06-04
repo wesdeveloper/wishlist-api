@@ -1,7 +1,7 @@
-import { FetchClientModel } from '../../domain/models';
-import { FetchClient } from '../../domain/usecases';
-import { HttpRequest, HttpResponse } from '../protocols';
-import { FetchClientController } from './fetch-client-controller';
+import { ClientModel, FetchClientModel } from '../../../domain/models';
+import { FetchClient } from '../../../domain/usecases';
+import { HttpRequest, HttpResponse } from '../../protocols';
+import { FetchClientController } from './fetch-client';
 
 const makeFetchClientUseCase = () => {
   class FetchClientSpy implements FetchClient {
@@ -15,6 +15,8 @@ const makeFetchClientUseCase = () => {
       };
       return fetchedClientData;
     }
+
+    fetchWithFilters = async (): Promise<ClientModel[]> => [];
   }
 
   const fetchClientSpy = new FetchClientSpy();

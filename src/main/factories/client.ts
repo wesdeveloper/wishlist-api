@@ -1,13 +1,19 @@
-import { UpdateClientController } from '../../presentation/controllers/update-client-controller';
-import { FetchClientByIdController } from '../../presentation/controllers/fetch-client-by-id';
-import { FetchClientController } from '../../presentation/controllers/fetch-client-controller';
 import database from '../../infra/db/mysql/db';
-import {
-  CreateClientUseCase, FetchClientUseCase, FetchClientByIdUseCase, UpdateClientUseCase, RemoveClientUseCase,
-} from '../../data/usecases';
 import { ClientRepository } from '../../infra/db/mysql/client-repository/client-repository';
-import { CreateClientController } from '../../presentation/controllers';
-import { RemoveClientController } from '../../presentation/controllers/remove-client-controller';
+import {
+  CreateClientUseCase,
+  FetchClientUseCase,
+  FetchClientByIdUseCase,
+  UpdateClientUseCase,
+  RemoveClientUseCase,
+} from '../../data/usecases';
+import {
+  CreateClientController,
+  FetchClientByIdController,
+  FetchClientController,
+  RemoveClientController,
+  UpdateClientController,
+} from '../../presentation/controllers';
 
 const dbConnection = database.getConnection();
 const clientRepository = new ClientRepository(dbConnection);

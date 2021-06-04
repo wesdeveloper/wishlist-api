@@ -1,8 +1,8 @@
-import { CreateClient } from '../../domain/usecases';
-import { validateObject } from '../../utils/validator';
-import { badRequest, serverError } from '../helpers';
-import { Controller, HttpResponse } from '../protocols';
-import { clientCreateSchema } from '../protocols/client-validator';
+import { CreateClient } from '../../../domain/usecases';
+import { validateObject } from '../../../utils/validator';
+import { badRequest, serverError } from '../../helpers';
+import { Controller, HttpResponse } from '../../protocols';
+import { clientCreateSchema } from '../../protocols/client-validator';
 
 export class CreateClientController implements Controller {
   constructor(

@@ -1,1 +1,1 @@
-export * from './create-client-controller';
+export * from './client';

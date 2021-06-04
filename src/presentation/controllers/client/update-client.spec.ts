@@ -1,8 +1,14 @@
 import Chance from 'chance';
 import { ClientModel } from 'src/domain/models';
-import { UpdateClient, UpdateClientData } from '../../domain/usecases';
-import { HttpRequest, HttpResponse } from '../protocols';
-import { UpdateClientController } from './update-client-controller';
+import { UpdateClientController } from './update-client';
+import {
+  UpdateClient,
+  UpdateClientData,
+} from '../../../domain/usecases';
+import {
+  HttpRequest,
+  HttpResponse,
+} from '../../protocols';
 
 const chance = new Chance();
 

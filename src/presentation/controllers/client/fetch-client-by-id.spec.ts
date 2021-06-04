@@ -1,7 +1,7 @@
 import Chance from 'chance';
-import { ClientModel } from '../../domain/models';
-import { FetchClientById } from '../../domain/usecases';
-import { HttpRequest, HttpResponse } from '../protocols';
+import { ClientModel } from '../../../domain/models';
+import { FetchClientById } from '../../../domain/usecases';
+import { HttpRequest, HttpResponse } from '../../protocols';
 import { FetchClientByIdController } from './fetch-client-by-id';
 
 const chance = new Chance();

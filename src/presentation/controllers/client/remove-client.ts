@@ -1,10 +1,14 @@
-import { RemoveClient } from '../../domain/usecases';
+import { RemoveClient } from '../../../domain/usecases';
 import {
   notFound,
   noContent,
   serverError,
-} from '../helpers';
-import { Controller, HttpRequest, HttpResponse } from '../protocols';
+} from '../../helpers';
+import {
+  Controller,
+  HttpRequest,
+  HttpResponse,
+} from '../../protocols';
 
 export class RemoveClientController implements Controller {
   constructor(

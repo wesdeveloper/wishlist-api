@@ -1,6 +1,6 @@
-import { FetchClient } from '../../domain/usecases';
-import { serverError } from '../helpers';
-import { Controller, HttpRequest, HttpResponse } from '../protocols';
+import { FetchClient } from '../../../domain/usecases';
+import { serverError } from '../../helpers';
+import { Controller, HttpRequest, HttpResponse } from '../../protocols';
 
 export class FetchClientController implements Controller {
   constructor(

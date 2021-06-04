@@ -1,14 +1,13 @@
 import Chance from 'chance';
-import { RemoveClient } from '../../domain/usecases';
-import { HttpRequest, HttpResponse } from '../protocols';
-import { RemoveClientController } from './remove-client-controller';
+import { RemoveClient } from '../../../domain/usecases';
+import { HttpRequest, HttpResponse } from '../../protocols';
+import { RemoveClientController } from './remove-client';
 
 const chance = new Chance();
 
 const makeRemoveClientUseCase = () => {
   class RemoveClientSpy implements RemoveClient {
-    // eslint-disable-next-line
-    remove = async (clientId: number): Promise<boolean> => true;
+    remove = async (): Promise<boolean> => true;
   }
 
   return new RemoveClientSpy();
