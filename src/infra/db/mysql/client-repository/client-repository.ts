@@ -37,6 +37,10 @@ export class ClientRepository implements
     };
   };
 
+  fetchWithFilters = async (filters: object): Promise<ClientModel[]> => this.dbConnection<ClientModel>('client')
+    .where(filters)
+    .select('*');
+
   fetchById = async (clientId: number): Promise<ClientModel | undefined> => {
     const [clientData] = await this.dbConnection<ClientModel>('client')
       .select('*')

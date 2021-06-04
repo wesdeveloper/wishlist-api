@@ -25,6 +25,12 @@ export class CreateClientController implements Controller {
         data: client,
       };
     } catch (e) {
+      if (e.message === 'email already exists') {
+        return badRequest([{
+          path: 'email',
+          message: e.message,
+        }]);
+      }
       return serverError();
     }
   }

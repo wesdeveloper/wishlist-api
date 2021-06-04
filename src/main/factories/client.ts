@@ -11,16 +11,16 @@ import { RemoveClientController } from '../../presentation/controllers/remove-cl
 
 const dbConnection = database.getConnection();
 const clientRepository = new ClientRepository(dbConnection);
+const fetchClient = new FetchClientUseCase(clientRepository);
 
 export const makeCreateClientController = (): CreateClientController => {
-  const createClient = new CreateClientUseCase(clientRepository);
+  const createClient = new CreateClientUseCase(clientRepository, fetchClient);
   const createClientController = new CreateClientController(createClient);
 
   return createClientController;
 };
 
 export const makeFetchClientController = (): FetchClientController => {
-  const fetchClient = new FetchClientUseCase(clientRepository);
   const fetchClientController = new FetchClientController(fetchClient);
 
   return fetchClientController;

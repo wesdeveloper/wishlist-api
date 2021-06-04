@@ -1,5 +1,5 @@
 import { FetchClientRepository } from '../../protocols';
-import { FetchClientModel } from '../../../domain/models';
+import { ClientModel, FetchClientModel } from '../../../domain/models';
 import { FetchClient } from '../../../domain/usecases';
 
 export class FetchClientUseCase implements FetchClient {
@@ -10,4 +10,6 @@ export class FetchClientUseCase implements FetchClient {
 
     return fetchedClientData;
   };
+
+  fetchWithFilters = async (filters: object): Promise<ClientModel[]> => this.fetchClientRepository.fetchWithFilters(filters);
 }

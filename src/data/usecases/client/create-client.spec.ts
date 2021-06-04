@@ -3,6 +3,7 @@ import { ClientModel } from '../../../domain/models';
 import { CreateClientData } from '../../../domain/usecases';
 import { CreateClientRepository } from '../../protocols';
 import { CreateClientUseCase } from './create-client';
+import { makeFetchClientRepository } from './fetch-client.spec';
 
 const chance = new Chance();
 
@@ -15,7 +16,8 @@ const makeCreateClientRepository = () => {
 
 const makeSut = () => {
   const createClientRepoStub = makeCreateClientRepository();
-  const sut = new CreateClientUseCase(createClientRepoStub);
+  const fetchClientRepoStub = makeFetchClientRepository();
+  const sut = new CreateClientUseCase(createClientRepoStub, fetchClientRepoStub);
 
   return sut;
 };
