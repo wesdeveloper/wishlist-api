@@ -22,7 +22,7 @@ describe('Create client', () => {
 
   describe('Error cases', () => {
     it('Should update a client with email that already exists', async () => {
-      const { body, status } = await global.testRequest
+      const { status } = await global.testRequest
         .post('/client')
         .send(clientData);
 
