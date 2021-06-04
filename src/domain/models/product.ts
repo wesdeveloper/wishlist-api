@@ -10,3 +10,14 @@ export interface FetchClientFavoriteProductsPaginated {
   products: Product[],
   pagination: any
 }
+
+export interface ProducModel {
+  id: number,
+  clientId: number,
+  productId: string
+}
+
+export interface FetchClientFavoriteProductsPaginatedRepository {
+  products: ProducModel[],
+  pagination: any
+}
