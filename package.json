@@ -12,7 +12,6 @@
     "start:dev": "cross-env NODE_ENV=development ts-node-dev bin/index.ts",
     "lint": "eslint --ext .ts .",
     "lint:fix": "eslint . --ext .ts --fix",
-    "test": "npm run test:unit && npm run test:functional",
     "test:unit": "jest",
     "test:unit:dev": "jest --watchAll",
     "test:functional": "cross-env NODE_ENV=test jest --projects ./test",
