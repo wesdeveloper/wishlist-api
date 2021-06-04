@@ -23,7 +23,7 @@ export class FetchClientFavoriteProductsController implements Controller {
         return notFound();
       }
 
-      const data = await this.fetchClientFavoriteProducts.fetchProducts(clientId, { page, pageSize });
+      const data = await this.fetchClientFavoriteProducts.fetchProducts(clientId, page, pageSize);
 
       return okRequest(data);
     } catch (e) {

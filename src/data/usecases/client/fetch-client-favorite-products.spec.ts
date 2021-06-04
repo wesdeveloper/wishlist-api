@@ -30,7 +30,7 @@ const makeRequestClient = () => {
 
 export const makeFetchClientFavoriteProductsRepository = () => {
   class FetchClientFavoriteProductsUseRepoStub implements FetchClientFavoriteProductsRepository {
-    fetch = async (clientId: number, page: number, pageSize: number): Promise<FetchClientFavoriteProductsPaginatedRepository> => {
+    fetchClientFavoriteProducts = async (clientId: number, page: number, pageSize: number): Promise<FetchClientFavoriteProductsPaginatedRepository> => {
       const fetchedProductsData = {
         products: [],
         pagination: {

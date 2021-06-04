@@ -1,3 +1,4 @@
+import { FetchClientFavoriteProductsUseCase } from '../../data/usecases/client/fetch-client-favorite-products';
 import { AxiosClient } from '../../data/utils/axios-client';
 import database from '../../infra/db/mysql/db';
 import { ClientRepository } from '../../infra/db/mysql/client-repository/client-repository';
@@ -14,6 +15,7 @@ import {
   CreateClientController,
   FetchClientByIdController,
   FetchClientController,
+  FetchClientFavoriteProductsController,
   RemoveClientController,
   UpdateClientController,
 } from '../../presentation/controllers';
@@ -64,4 +66,12 @@ export const makeAddClientFavoriteProductController = (): AddClientFavoriteProdu
   const addClientFavoriteProductController = new AddClientFavoriteProductController(addClientFavoriteProduct);
 
   return addClientFavoriteProductController;
+};
+
+export const makeFetchClientFavoriteProductController = (): FetchClientFavoriteProductsController => {
+  const axiosClient = new AxiosClient();
+  const fetchClientFavoriteProducts = new FetchClientFavoriteProductsUseCase(clientRepository, axiosClient, PRODUCT_API_HOST || '');
+  const fetchClientFavoriteProductsController = new FetchClientFavoriteProductsController(fetchClientFavoriteProducts, clientRepository);
+
+  return fetchClientFavoriteProductsController;
 };

@@ -5,6 +5,7 @@ import {
   makeCreateClientController,
   makeFetchClientByIdController,
   makeFetchClientController,
+  makeFetchClientFavoriteProductController,
   makeRemoveClientController,
   makeUpdateClientController,
 } from '../factories/client';
@@ -18,11 +19,16 @@ class ClientRoutes extends BaseRoutes {
     const updateClientController = makeUpdateClientController();
     const removeClientController = makeRemoveClientController();
     const addClientFavoriteProductController = makeAddClientFavoriteProductController();
+    const fetchClientFavoriteProductsController = makeFetchClientFavoriteProductController();
 
     router
       .post(
         '/client/:clientId/favorite-products/:productId',
         expressRouterAdapter(addClientFavoriteProductController),
+      )
+      .get(
+        '/client/:clientId/favorite-products',
+        expressRouterAdapter(fetchClientFavoriteProductsController),
       )
       .get('/client/:clientId', expressRouterAdapter(fetchClientByIdController))
       .patch('/client/:clientId', expressRouterAdapter(updateClientController))

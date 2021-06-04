@@ -10,7 +10,7 @@ export class FetchClientFavoriteProductsUseCase implements FetchClientFavoritePr
   ) {}
 
   fetchProducts = async (clientId: number, page = 1, pageSize = 10): Promise<FetchClientFavoriteProductsPaginated> => {
-    const { products: favoriteProducts, pagination } = await this.fetchClientFavoriteProductsRepository.fetch(clientId, page, pageSize);
+    const { products: favoriteProducts, pagination } = await this.fetchClientFavoriteProductsRepository.fetchClientFavoriteProducts(clientId, page, pageSize);
 
     const products = await Promise.all(favoriteProducts.map(({ productId }) => this.getProducData(productId)));
 

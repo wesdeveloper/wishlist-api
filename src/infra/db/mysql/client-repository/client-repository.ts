@@ -3,11 +3,12 @@ import {
   AddClientFavoriteProductRepository,
   CreateClientRepository,
   FetchClientByIdRepository,
+  FetchClientFavoriteProductsRepository,
   FetchClientRepository,
   RemoveClientRepository,
   UpdateClientRepository,
 } from '../../../../data/protocols';
-import { ClientModel, FetchClientModel } from '../../../../domain/models';
+import { ClientModel, FetchClientFavoriteProductsPaginatedRepository, FetchClientModel } from '../../../../domain/models';
 import { CreateClientData, UpdateClientData } from '../../../../domain/usecases';
 
 export class ClientRepository implements
@@ -16,7 +17,8 @@ export class ClientRepository implements
   FetchClientByIdRepository,
   UpdateClientRepository,
   RemoveClientRepository,
-  AddClientFavoriteProductRepository {
+  AddClientFavoriteProductRepository,
+  FetchClientFavoriteProductsRepository {
   constructor(private readonly dbConnection: Knex<any, unknown[]>) {
   }
 
@@ -82,4 +84,22 @@ export class ClientRepository implements
 
     return !!isAdded;
   };
+
+  fetchClientFavoriteProducts = async (clientId: number, page: number, pageSize: number): Promise<FetchClientFavoriteProductsPaginatedRepository> => {
+    const { data, pagination } = await this.dbConnection('favorite_products')
+      .where('client_id', clientId)
+      .select('*')
+      .paginate({ perPage: pageSize, currentPage: page });
+
+    return {
+      products: this.formatProducts(data),
+      pagination,
+    };
+  };
+
+  formatProducts = (products: any) => products.map((product: any) => ({
+    id: product.id,
+    clientId: product.client_id,
+    productId: product.product_id,
+  }));
 }
