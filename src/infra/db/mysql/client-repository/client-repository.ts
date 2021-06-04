@@ -1,6 +1,11 @@
 import { Knex } from 'knex';
 import {
-  CreateClientRepository, FetchClientByIdRepository, FetchClientRepository, RemoveClientRepository, UpdateClientRepository,
+  AddClientFavoriteProductRepository,
+  CreateClientRepository,
+  FetchClientByIdRepository,
+  FetchClientRepository,
+  RemoveClientRepository,
+  UpdateClientRepository,
 } from '../../../../data/protocols';
 import { ClientModel, FetchClientModel } from '../../../../domain/models';
 import { CreateClientData, UpdateClientData } from '../../../../domain/usecases';
@@ -10,7 +15,8 @@ export class ClientRepository implements
   FetchClientRepository,
   FetchClientByIdRepository,
   UpdateClientRepository,
-  RemoveClientRepository {
+  RemoveClientRepository,
+  AddClientFavoriteProductRepository {
   constructor(private readonly dbConnection: Knex<any, unknown[]>) {
   }
 
@@ -67,5 +73,13 @@ export class ClientRepository implements
       .del();
 
     return !!isRemoved;
+  };
+
+  addFavoriteProduct = async (clientId: number, productId: string): Promise<boolean> => {
+    const [isAdded] = await this.dbConnection('favorite_products')
+      .insert({ client_id: clientId, product_id: productId })
+      .select('*');
+
+    return !!isAdded;
   };
 }

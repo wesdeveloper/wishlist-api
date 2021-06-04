@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { expressRouterAdapter } from '../adapters/express-route-adapter';
 import {
+  makeAddClientFavoriteProductController,
   makeCreateClientController,
   makeFetchClientByIdController,
   makeFetchClientController,
@@ -16,8 +17,13 @@ class ClientRoutes extends BaseRoutes {
     const fetchClientByIdController = makeFetchClientByIdController();
     const updateClientController = makeUpdateClientController();
     const removeClientController = makeRemoveClientController();
+    const addClientFavoriteProductController = makeAddClientFavoriteProductController();
 
     router
+      .post(
+        '/client/:clientId/favorite-products/:productId',
+        expressRouterAdapter(addClientFavoriteProductController),
+      )
       .get('/client/:clientId', expressRouterAdapter(fetchClientByIdController))
       .patch('/client/:clientId', expressRouterAdapter(updateClientController))
       .delete('/client/:clientId', expressRouterAdapter(removeClientController))
