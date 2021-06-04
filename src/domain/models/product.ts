@@ -5,3 +5,8 @@ export interface Product {
   id: string,
   title: string
 }
+
+export interface FetchClientFavoriteProductsPaginated {
+  products: Product[],
+  pagination: any
+}
