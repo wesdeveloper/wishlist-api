@@ -23,7 +23,7 @@ export class AddClientFavoriteProductUseCase implements AddClientFavoriteProduct
       return false;
     }
 
-    return this.addClientFavoriteProductRepository.add(clientId, productId);
+    return this.addClientFavoriteProductRepository.addFavoriteProduct(clientId, productId);
   };
 
   getProductApiUrl = (productId: string) => `${this.productApiHost}/api/product/${productId}/`;

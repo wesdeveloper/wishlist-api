@@ -36,7 +36,7 @@ const makeRequestClient = () => {
 
 const makeAddClientFavoriteProductRepository = () => {
   class AddClientFavoriteProductUseRepoStub implements AddClientFavoriteProductRepository {
-    add = async (): Promise<boolean> => true;
+    addFavoriteProduct = async (): Promise<boolean> => true;
   }
   return new AddClientFavoriteProductUseRepoStub();
 };
